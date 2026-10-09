@@ -1,0 +1,6 @@
+@AlIzza.API_HostAddress = http://localhost:5027
+
+GET {{AlIzza.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
