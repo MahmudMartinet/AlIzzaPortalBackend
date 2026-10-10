@@ -57,6 +57,10 @@ namespace AlIzza.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -117,10 +121,18 @@ namespace AlIzza.API.Migrations
                     b.Property<int>("AdmissionStatus")
                         .HasColumnType("integer");
 
+                    b.Property<string>("ClassApplyingFor")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("text");
 
