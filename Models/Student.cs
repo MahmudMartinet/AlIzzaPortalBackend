@@ -15,7 +15,8 @@ namespace AlIzza.API.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
-        
+        public string Gender { get; set; } = string.Empty;
+        public string ClassApplyingFor { get; set; } = string.Empty;
         // Generated only when Admin approves admission (e.g., 202601)
         public string? SchoolNumber { get; set; } 
 
