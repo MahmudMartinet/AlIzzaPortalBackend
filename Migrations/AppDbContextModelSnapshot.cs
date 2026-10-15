@@ -22,6 +22,32 @@ namespace AlIzza.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("AlIzza.API.Models.AcademicClass", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ClassTeacherId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<Guid>("SchoolId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassTeacherId");
+
+                    b.HasIndex("SchoolId");
+
+                    b.ToTable("AcademicClasses");
+                });
+
             modelBuilder.Entity("AlIzza.API.Models.Parent", b =>
                 {
                     b.Property<Guid>("Id")
@@ -95,6 +121,10 @@ namespace AlIzza.API.Migrations
                     b.Property<string>("ProfilePictureUrl")
                         .HasColumnType("text");
 
+                    b.Property<string>("Qualification")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("RoleType")
                         .HasColumnType("integer");
 
@@ -165,6 +195,54 @@ namespace AlIzza.API.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("AlIzza.API.Models.Subject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AcademicClassId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid?>("TeacherId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcademicClassId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("AlIzza.API.Models.AcademicClass", b =>
+                {
+                    b.HasOne("AlIzza.API.Models.Staff", "ClassTeacher")
+                        .WithMany()
+                        .HasForeignKey("ClassTeacherId");
+
+                    b.HasOne("AlIzza.API.Models.School", "School")
+                        .WithMany()
+                        .HasForeignKey("SchoolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassTeacher");
+
+                    b.Navigation("School");
+                });
+
             modelBuilder.Entity("AlIzza.API.Models.Staff", b =>
                 {
                     b.HasOne("AlIzza.API.Models.School", "School")
@@ -193,6 +271,28 @@ namespace AlIzza.API.Migrations
                     b.Navigation("Parent");
 
                     b.Navigation("School");
+                });
+
+            modelBuilder.Entity("AlIzza.API.Models.Subject", b =>
+                {
+                    b.HasOne("AlIzza.API.Models.AcademicClass", "AcademicClass")
+                        .WithMany("Subjects")
+                        .HasForeignKey("AcademicClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AlIzza.API.Models.Staff", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("AcademicClass");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("AlIzza.API.Models.AcademicClass", b =>
+                {
+                    b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("AlIzza.API.Models.Parent", b =>

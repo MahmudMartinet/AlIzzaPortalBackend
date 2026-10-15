@@ -23,3 +23,23 @@ Accept: application/json
 ### Get Staff by School ID
 GET http://localhost:5027/api/staff/school/YOUR_SCHOOL_GUID_HERE
 Accept: application/json
+
+
+### Create Academic Class
+POST http://localhost:5027/api/academics/classes
+Content-Type: application/json
+
+{
+  "name": "JSS 1 Gold",
+  "schoolId": "YOUR_SCHOOL_GUID_HERE"
+}
+
+### Add Subject to Class
+POST http://localhost:5027/api/academics/subjects
+Content-Type: application/json
+
+{
+  "name": "Arabic Language",
+  "code": "ARB101",
+  "academicClassId": "YOUR_CLASS_GUID_HERE"
+}

@@ -11,6 +11,8 @@ namespace AlIzza.API.Data
         public DbSet<Parent> Parents => Set<Parent>();
         public DbSet<Student> Students => Set<Student>();
         public DbSet<Staff> StaffMembers => Set<Staff>();
+        public DbSet<AcademicClass> AcademicClasses { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
