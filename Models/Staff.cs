@@ -18,7 +18,7 @@ namespace AlIzza.API.Models
         public string StaffNumber { get; set; } = string.Empty; // Unique employee ID
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        
+        public string Qualification { get; set; } = string.Empty;
         // Profile Picture URL
         public string? ProfilePictureUrl { get; set; }
 

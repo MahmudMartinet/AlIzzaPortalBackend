@@ -1,2 +1,25 @@
 GET http://localhost:5027/api/admissions/parents
 Accept: application/json
+
+
+
+### Register a new Staff Member
+POST http://localhost:5027/api/staff
+Content-Type: application/json
+
+{
+  "fullName": "Uthman Al-Khattab",
+  "email": "uthman@alizza.sch.ng",
+  "phone": "08099887766",
+  "roleType": "Teacher",
+  "qualification": "B.Sc Computer Science",
+  "schoolId": "YOUR_SCHOOL_GUID_HERE"
+}
+
+### Get All Staff Members
+GET http://localhost:5027/api/staff
+Accept: application/json
+
+### Get Staff by School ID
+GET http://localhost:5027/api/staff/school/YOUR_SCHOOL_GUID_HERE
+Accept: application/json
